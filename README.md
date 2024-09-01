@@ -8,14 +8,14 @@ Directory structure:
 - ten-piece
     - README.md (You Are Here!)
     - .gitignore
-    - catie-cdk/
+    - ten-piece/
     - ten-piece-cdk/
-    - ten-piece-core/
+    - catie-cdk/
 ```
 
-## Catie's Easy AWS CDK Library (catie-cdk)
+## TenPiece (ten-piece)
 
-CatieCDK is a TypeScript wrapper library for building AWS CDK applications with a minimum of fuss.
+Python service code for the TenPiece application.
 
 ## TenPiece CDK/Infrastructure (ten-piece-cdk)
 
@@ -30,6 +30,6 @@ CDK and infrastructure definitions for the TenPiece application.
 * `npx cdk diff`    Compare deployed stack with current state
 * `npx cdk synth`   Emits the synthesized CloudFormation template
 
-## TenPiece (ten-piece)
+## Catie's Easy AWS CDK Library (catie-cdk)
 
-Python service code for the TenPiece application.
+CatieCDK is a TypeScript wrapper library for building AWS CDK applications with a minimum of fuss.
