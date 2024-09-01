@@ -1,0 +1,11 @@
+*.ts
+!*.d.ts
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
