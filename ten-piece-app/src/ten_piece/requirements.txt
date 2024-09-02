@@ -1,0 +1,4 @@
+requests
+boto3
+pydantic
+aws_lambda_powertools

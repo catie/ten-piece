@@ -1,0 +1,96 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  python3.9
+
+  Sample SAM Template for ten-piece-app
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+    MemorySize: 128
+
+    Tracing: Active
+    Environment:
+      Variables:
+        POWERTOOLS_SERVICE_NAME: TenPiece
+        POWERTOOLS_LOG_LEVEL: INFO
+
+        STAGE: dev
+        USER_TABLE: users-dev
+        PARTICIPANT_TABLE: participants-dev
+        CHARACTER_TABLE: characters-dev
+    LoggingConfig:
+      LogFormat: JSON
+  Api:
+    TracingEnabled: true
+Resources:
+  TenPieceApi:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Architectures:
+      - x86_64
+      Events:
+        GetUser:
+          Type: Api
+          Properties:
+            Path: /user
+            Method: get
+        UpdateUser:
+          Type: Api
+          Properties:
+            Path: /user
+            Method: post
+        GetParticipant:
+          Type: Api
+          Properties:
+            Path: /participant
+            Method: get
+        UpdateParticipant:
+          Type: Api
+          Properties:
+            Path: /participant
+            Method: post
+        GetCharacter:
+          Type: Api
+          Properties:
+            Path: /character
+            Method: get
+        UpdateCharacter:
+          Type: Api
+          Properties:
+            Path: /character
+            Method: post
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./
+      DockerTag: python3.9-v1
+
+  ApplicationResourceGroup:
+    Type: AWS::ResourceGroups::Group
+    Properties:
+      Name:
+        Fn::Sub: ApplicationInsights-SAM-${AWS::StackName}
+      ResourceQuery:
+        Type: CLOUDFORMATION_STACK_1_0
+  ApplicationInsightsMonitoring:
+    Type: AWS::ApplicationInsights::Application
+    Properties:
+      ResourceGroupName:
+        Ref: ApplicationResourceGroup
+      AutoConfigurationEnabled: 'true'
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  HelloWorldApi:
+    Description: API Gateway endpoint URL for Prod stage for Ten Piece API
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  TenPieceApi:
+    Description: Ten Piece API Function ARN
+    Value: !GetAtt TenPieceApi.Arn
+  TenPieceApiIamRole:
+    Description: Implicit IAM Role created for  function
+    Value: !GetAtt TenPieceApiRole.Arn

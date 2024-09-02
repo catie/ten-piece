@@ -1,0 +1,705 @@
+{
+ "Resources": {
+  "TenPiececoreB59E8E3C": {
+   "Type": "AWS::ECS::Cluster",
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Resource"
+   }
+  },
+  "TenPiececoreVpcDFBC1115": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "TenPiece/TenPiece-core/Vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/Resource"
+   }
+  },
+  "TenPiececoreVpcPublicSubnet1Subnet487CFBC7": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-2a",
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "TenPiece/TenPiece-core/Vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "TenPiececoreVpcDFBC1115"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PublicSubnet1/Subnet"
+   }
+  },
+  "TenPiececoreVpcPublicSubnet1RouteTableB05E59EA": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "TenPiece/TenPiece-core/Vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "TenPiececoreVpcDFBC1115"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PublicSubnet1/RouteTable"
+   }
+  },
+  "TenPiececoreVpcPublicSubnet1RouteTableAssociation77C1F003": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "TenPiececoreVpcPublicSubnet1RouteTableB05E59EA"
+    },
+    "SubnetId": {
+     "Ref": "TenPiececoreVpcPublicSubnet1Subnet487CFBC7"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "TenPiececoreVpcPublicSubnet1DefaultRoute4F2FC11F": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "TenPiececoreVpcIGW9481F885"
+    },
+    "RouteTableId": {
+     "Ref": "TenPiececoreVpcPublicSubnet1RouteTableB05E59EA"
+    }
+   },
+   "DependsOn": [
+    "TenPiececoreVpcVPCGW1AFF1167"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "TenPiececoreVpcPublicSubnet1EIPCECEAFB8": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "TenPiece/TenPiece-core/Vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PublicSubnet1/EIP"
+   }
+  },
+  "TenPiececoreVpcPublicSubnet1NATGateway74CA7898": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "TenPiececoreVpcPublicSubnet1EIPCECEAFB8",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "TenPiececoreVpcPublicSubnet1Subnet487CFBC7"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "TenPiece/TenPiece-core/Vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "TenPiececoreVpcPublicSubnet1DefaultRoute4F2FC11F",
+    "TenPiececoreVpcPublicSubnet1RouteTableAssociation77C1F003"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PublicSubnet1/NATGateway"
+   }
+  },
+  "TenPiececoreVpcPublicSubnet2Subnet6925BD5F": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-2b",
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "TenPiece/TenPiece-core/Vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "TenPiececoreVpcDFBC1115"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PublicSubnet2/Subnet"
+   }
+  },
+  "TenPiececoreVpcPublicSubnet2RouteTable28EDEAFF": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "TenPiece/TenPiece-core/Vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "TenPiececoreVpcDFBC1115"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PublicSubnet2/RouteTable"
+   }
+  },
+  "TenPiececoreVpcPublicSubnet2RouteTableAssociation2FC29ABA": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "TenPiececoreVpcPublicSubnet2RouteTable28EDEAFF"
+    },
+    "SubnetId": {
+     "Ref": "TenPiececoreVpcPublicSubnet2Subnet6925BD5F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PublicSubnet2/RouteTableAssociation"
+   }
+  },
+  "TenPiececoreVpcPublicSubnet2DefaultRoute5DEF2197": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "TenPiececoreVpcIGW9481F885"
+    },
+    "RouteTableId": {
+     "Ref": "TenPiececoreVpcPublicSubnet2RouteTable28EDEAFF"
+    }
+   },
+   "DependsOn": [
+    "TenPiececoreVpcVPCGW1AFF1167"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PublicSubnet2/DefaultRoute"
+   }
+  },
+  "TenPiececoreVpcPublicSubnet2EIPAF1C066D": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "TenPiece/TenPiece-core/Vpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PublicSubnet2/EIP"
+   }
+  },
+  "TenPiececoreVpcPublicSubnet2NATGatewayF97536CC": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "TenPiececoreVpcPublicSubnet2EIPAF1C066D",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "TenPiececoreVpcPublicSubnet2Subnet6925BD5F"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "TenPiece/TenPiece-core/Vpc/PublicSubnet2"
+     }
+    ]
+   },
+   "DependsOn": [
+    "TenPiececoreVpcPublicSubnet2DefaultRoute5DEF2197",
+    "TenPiececoreVpcPublicSubnet2RouteTableAssociation2FC29ABA"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PublicSubnet2/NATGateway"
+   }
+  },
+  "TenPiececoreVpcPrivateSubnet1Subnet835FD02C": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-2a",
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "TenPiece/TenPiece-core/Vpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "TenPiececoreVpcDFBC1115"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PrivateSubnet1/Subnet"
+   }
+  },
+  "TenPiececoreVpcPrivateSubnet1RouteTable624641A3": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "TenPiece/TenPiece-core/Vpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "TenPiececoreVpcDFBC1115"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PrivateSubnet1/RouteTable"
+   }
+  },
+  "TenPiececoreVpcPrivateSubnet1RouteTableAssociationA3F5739D": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "TenPiececoreVpcPrivateSubnet1RouteTable624641A3"
+    },
+    "SubnetId": {
+     "Ref": "TenPiececoreVpcPrivateSubnet1Subnet835FD02C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PrivateSubnet1/RouteTableAssociation"
+   }
+  },
+  "TenPiececoreVpcPrivateSubnet1DefaultRouteC50D19E1": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "TenPiececoreVpcPublicSubnet1NATGateway74CA7898"
+    },
+    "RouteTableId": {
+     "Ref": "TenPiececoreVpcPrivateSubnet1RouteTable624641A3"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PrivateSubnet1/DefaultRoute"
+   }
+  },
+  "TenPiececoreVpcPrivateSubnet2SubnetC2D2E832": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-2b",
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "TenPiece/TenPiece-core/Vpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "TenPiececoreVpcDFBC1115"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PrivateSubnet2/Subnet"
+   }
+  },
+  "TenPiececoreVpcPrivateSubnet2RouteTable8023BC70": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "TenPiece/TenPiece-core/Vpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "TenPiececoreVpcDFBC1115"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PrivateSubnet2/RouteTable"
+   }
+  },
+  "TenPiececoreVpcPrivateSubnet2RouteTableAssociation238F3CB0": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "TenPiececoreVpcPrivateSubnet2RouteTable8023BC70"
+    },
+    "SubnetId": {
+     "Ref": "TenPiececoreVpcPrivateSubnet2SubnetC2D2E832"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PrivateSubnet2/RouteTableAssociation"
+   }
+  },
+  "TenPiececoreVpcPrivateSubnet2DefaultRoute70894ED0": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "TenPiececoreVpcPublicSubnet2NATGatewayF97536CC"
+    },
+    "RouteTableId": {
+     "Ref": "TenPiececoreVpcPrivateSubnet2RouteTable8023BC70"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/PrivateSubnet2/DefaultRoute"
+   }
+  },
+  "TenPiececoreVpcIGW9481F885": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "TenPiece/TenPiece-core/Vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/IGW"
+   }
+  },
+  "TenPiececoreVpcVPCGW1AFF1167": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "TenPiececoreVpcIGW9481F885"
+    },
+    "VpcId": {
+     "Ref": "TenPiececoreVpcDFBC1115"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/VPCGW"
+   }
+  },
+  "TenPiececoreVpcRestrictDefaultSecurityGroupCustomResource7B8BE8BD": {
+   "Type": "Custom::VpcRestrictDefaultSG",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+      "Arn"
+     ]
+    },
+    "DefaultSecurityGroupId": {
+     "Fn::GetAtt": [
+      "TenPiececoreVpcDFBC1115",
+      "DefaultSecurityGroup"
+     ]
+    },
+    "Account": "892020340442"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/TenPiece-core/Vpc/RestrictDefaultSecurityGroupCustomResource/Default"
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": [
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupIngress",
+          "ec2:RevokeSecurityGroupEgress"
+         ],
+         "Resource": [
+          {
+           "Fn::Join": [
+            "",
+            [
+             "arn:aws:ec2:us-east-2:892020340442:security-group/",
+             {
+              "Fn::GetAtt": [
+               "TenPiececoreVpcDFBC1115",
+               "DefaultSecurityGroup"
+              ]
+             }
+            ]
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role"
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-892020340442-us-east-2",
+     "S3Key": "ee7de53d64cc9d6248fa6aa550f92358f6c907b5efd6f3298aeab1b5e7ea358a.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Description": "Lambda function for removing all inbound/outbound rules from the VPC default security group"
+   },
+   "DependsOn": [
+    "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.ee7de53d64cc9d6248fa6aa550f92358f6c907b5efd6f3298aeab1b5e7ea358a",
+    "aws:asset:property": "Code"
+   }
+  },
+  "SecurityGroupDD263621": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "TenPiece/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "from 0.0.0.0/0:3000",
+      "FromPort": 3000,
+      "IpProtocol": "tcp",
+      "ToPort": 3000
+     }
+    ],
+    "VpcId": {
+     "Ref": "TenPiececoreVpcDFBC1115"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/SecurityGroup/Resource"
+   }
+  },
+  "usersuserstableFDE9D7C3": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "user_id",
+      "AttributeType": "S"
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "user_id",
+      "KeyType": "HASH"
+     }
+    ],
+    "ProvisionedThroughput": {
+     "ReadCapacityUnits": 5,
+     "WriteCapacityUnits": 5
+    },
+    "TableName": "users-dev"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/users/users-table/Resource"
+   }
+  },
+  "participantsparticipantstableA9E84533": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "participant_id",
+      "AttributeType": "S"
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "participant_id",
+      "KeyType": "HASH"
+     }
+    ],
+    "ProvisionedThroughput": {
+     "ReadCapacityUnits": 5,
+     "WriteCapacityUnits": 5
+    },
+    "TableName": "participants-dev"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/participants/participants-table/Resource"
+   }
+  },
+  "characterscharacterstableD3819F23": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "character_id",
+      "AttributeType": "S"
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "character_id",
+      "KeyType": "HASH"
+     }
+    ],
+    "ProvisionedThroughput": {
+     "ReadCapacityUnits": 5,
+     "WriteCapacityUnits": 5
+    },
+    "TableName": "characters-dev"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/characters/characters-table/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/22QQW7CMBBFz8LecSFSDkCjCrGpoqRiWznOlA4kNrLHQVHku3cCFHfRld88j6z/nctNUcj1Sl19prtz1mMr54aUPgtWnzNoL+eyD57AifLLPDAK0LmcDxe9yENViiq0PeomtAZocYlqGwg+VNtD8sltvbcaFaE1z+UF3vbVcrwr2imCq5pE5XBkTA/vDSdh/l24J3lMW+IS3wMYEg3o4JCmnbPhcsvwV0TRTUYNtuPiz5Q3iFHU4G1wmh3XtkMaOen/V5WzI3bgXpUHweWA+DePaI5RGNuBPPmXMV/LQm5WJ4+YuWAIB5D1/fwBUkY8i5ABAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "TenPiece/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

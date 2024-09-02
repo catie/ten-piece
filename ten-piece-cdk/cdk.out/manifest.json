@@ -1,0 +1,281 @@
+{
+  "version": "36.0.22",
+  "artifacts": {
+    "TenPiece.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "TenPiece.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "TenPiece": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://892020340442/us-east-2",
+      "properties": {
+        "templateFile": "TenPiece.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::892020340442:role/cdk-hnb659fds-deploy-role-892020340442-us-east-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::892020340442:role/cdk-hnb659fds-cfn-exec-role-892020340442-us-east-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-892020340442-us-east-2/b4cdcc4bb3742252062c8c720da52b1acc5cb20f331d489101013cc9a1527575.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "TenPiece.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::892020340442:role/cdk-hnb659fds-lookup-role-892020340442-us-east-2",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "TenPiece.assets"
+      ],
+      "metadata": {
+        "/TenPiece/TenPiece-core/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreB59E8E3C"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcDFBC1115"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPublicSubnet1Subnet487CFBC7"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPublicSubnet1RouteTableB05E59EA"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPublicSubnet1RouteTableAssociation77C1F003"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPublicSubnet1DefaultRoute4F2FC11F"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPublicSubnet1EIPCECEAFB8"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPublicSubnet1NATGateway74CA7898"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPublicSubnet2Subnet6925BD5F"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPublicSubnet2RouteTable28EDEAFF"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPublicSubnet2RouteTableAssociation2FC29ABA"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPublicSubnet2DefaultRoute5DEF2197"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PublicSubnet2/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPublicSubnet2EIPAF1C066D"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PublicSubnet2/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPublicSubnet2NATGatewayF97536CC"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPrivateSubnet1Subnet835FD02C"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPrivateSubnet1RouteTable624641A3"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPrivateSubnet1RouteTableAssociationA3F5739D"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPrivateSubnet1DefaultRouteC50D19E1"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPrivateSubnet2SubnetC2D2E832"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPrivateSubnet2RouteTable8023BC70"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPrivateSubnet2RouteTableAssociation238F3CB0"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcPrivateSubnet2DefaultRoute70894ED0"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcIGW9481F885"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcVPCGW1AFF1167"
+          }
+        ],
+        "/TenPiece/TenPiece-core/Vpc/RestrictDefaultSecurityGroupCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TenPiececoreVpcRestrictDefaultSecurityGroupCustomResource7B8BE8BD"
+          }
+        ],
+        "/TenPiece/Custom::VpcRestrictDefaultSGCustomResourceProvider": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+            "data": true
+          }
+        ],
+        "/TenPiece/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+          }
+        ],
+        "/TenPiece/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E"
+          }
+        ],
+        "/TenPiece/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SecurityGroupDD263621"
+          }
+        ],
+        "/TenPiece/users/users-table": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "usersuserstableFDE9D7C3"
+            }
+          }
+        ],
+        "/TenPiece/users/users-table/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "usersuserstableFDE9D7C3"
+          }
+        ],
+        "/TenPiece/participants/participants-table": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "participantsparticipantstableA9E84533"
+            }
+          }
+        ],
+        "/TenPiece/participants/participants-table/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "participantsparticipantstableA9E84533"
+          }
+        ],
+        "/TenPiece/characters/characters-table": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "characterscharacterstableD3819F23"
+            }
+          }
+        ],
+        "/TenPiece/characters/characters-table/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "characterscharacterstableD3819F23"
+          }
+        ],
+        "/TenPiece/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/TenPiece/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/TenPiece/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "TenPiece"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

@@ -7,14 +7,17 @@ export const definition: ServiceDefinition = {
   serviceName: "TenPiece",
   components: {
     users: {
-      "partitionKey": "user_id"
+      partitionKey: "user_id"
     },
     participants: {
-      "partitionKey": "participant_id"
+      partitionKey: "participant_id"
     },
     characters: {
-      "partitionKey": "character_id"
+      partitionKey: "character_id"
     },
+    api: {
+      assetPath: "../ten-piece-app",
+    }
   },
 }
 const app = new App();

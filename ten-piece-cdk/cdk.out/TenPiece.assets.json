@@ -1,0 +1,34 @@
+{
+  "version": "36.0.22",
+  "files": {
+    "ee7de53d64cc9d6248fa6aa550f92358f6c907b5efd6f3298aeab1b5e7ea358a": {
+      "source": {
+        "path": "asset.ee7de53d64cc9d6248fa6aa550f92358f6c907b5efd6f3298aeab1b5e7ea358a",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "892020340442-us-east-2": {
+          "bucketName": "cdk-hnb659fds-assets-892020340442-us-east-2",
+          "objectKey": "ee7de53d64cc9d6248fa6aa550f92358f6c907b5efd6f3298aeab1b5e7ea358a.zip",
+          "region": "us-east-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::892020340442:role/cdk-hnb659fds-file-publishing-role-892020340442-us-east-2"
+        }
+      }
+    },
+    "b4cdcc4bb3742252062c8c720da52b1acc5cb20f331d489101013cc9a1527575": {
+      "source": {
+        "path": "TenPiece.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "892020340442-us-east-2": {
+          "bucketName": "cdk-hnb659fds-assets-892020340442-us-east-2",
+          "objectKey": "b4cdcc4bb3742252062c8c720da52b1acc5cb20f331d489101013cc9a1527575.json",
+          "region": "us-east-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::892020340442:role/cdk-hnb659fds-file-publishing-role-892020340442-us-east-2"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}
