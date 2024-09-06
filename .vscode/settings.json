@@ -1,6 +1,11 @@
 {
-    "python.analysis.typeCheckingMode": "basic",
+    "python.testing.pytestArgs": [
+        "ten-piece-app"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
     "python.analysis.extraPaths": [
         "./ten-piece-app/src"
-    ]
+    ],
+    "python.analysis.typeCheckingMode": "basic"
 }

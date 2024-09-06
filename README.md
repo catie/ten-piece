@@ -13,9 +13,21 @@ Directory structure:
     - catie-cdk/
 ```
 
-## TenPiece (ten-piece)
+## TenPiece (ten-piece-app)
 
-Python service code for the TenPiece application.
+AWS SAM app and Python service code for the TenPiece application.
+
+### Dev Environment Setup
+These steps assume the developer alread has the TenPiece project is already checked out locally.
+
+* Install [Python 3.12](https://www.python.org/downloads/). Confirm that `pip` was installed correctly:
+    `> pip3 --version`
+* Navigate to the `ten-piece-app` directory:
+    `> cd ten-piece-app`
+* Install the required Python dependencies:
+    `> pip3 install -r requirements.txt`
+* Build the project to confirm that your Python environment is set up correctly:
+    `> python3 -m build`
 
 ## TenPiece CDK/Infrastructure (ten-piece-cdk)
 

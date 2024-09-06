@@ -1,19 +1,25 @@
 #!/usr/bin/env node
-import 'source-map-support/register';
+
 import { App } from 'aws-cdk-lib';
 import { EnvironmentContext, Service, ServiceDefinition } from 'catie-cdk';
 
 export const definition: ServiceDefinition = {
   serviceName: "TenPiece",
   components: {
-    users: {
+    User: {
       partitionKey: "user_id"
     },
-    participants: {
-      partitionKey: "participant_id"
+    Scope: {
+      partitionKey: "scope_id"
     },
-    characters: {
+    Tag: {
+      partitionKey: "tag_id"
+    },
+    Character: {
       partitionKey: "character_id"
+    },
+    Ranking: {
+      partitionKey: "ranking_id"
     },
     api: {
       assetPath: "../ten-piece-app",

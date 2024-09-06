@@ -1,7 +1,7 @@
-FROM public.ecr.aws/lambda/python:3.9
+FROM public.ecr.aws/lambda/python:3.12
 
-COPY ten_piece/requirements.txt ./
-RUN python3.9 -m pip install -r requirements.txt -t .
+COPY ../requirements.txt ./
+RUN python3.12 -m pip install -r requirements.txt -t .
 
 COPY ten_piece ./ten_piece/
 

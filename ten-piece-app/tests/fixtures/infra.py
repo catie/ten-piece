@@ -1,3 +1,4 @@
+from typing import Callable
 import pytest
 import boto3
 from moto import mock_aws
@@ -30,8 +31,10 @@ def test_service():
 
 
 @pytest.fixture
-def build_dynamo_table(test_aws_environment, test_stage, test_region):
-    def inner(table_name: str, parition_key: str):
+def build_dynamo_table(
+    test_aws_environment, test_stage, test_region
+) -> Callable[[str, str], str]:
+    def inner(table_name: str, parition_key: str) -> str:
         client = boto3.client("dynamodb", test_region)
         full_table_name = f"{table_name}-{test_stage}"
         client.create_table(
@@ -50,37 +53,8 @@ def build_dynamo_table(test_aws_environment, test_stage, test_region):
 
 
 @pytest.fixture
-def user_table(build_dynamo_table):
-    return build_dynamo_table("users", "user_id")
+def data_table(build_dynamo_table) -> Callable[[str], str]:
+    def inner(entity_type: str) -> str:
+        return build_dynamo_table(entity_type, f"{entity_type}_id")
 
-
-@pytest.fixture
-def participant_table(build_dynamo_table):
-    return build_dynamo_table("pariticipants", "participant_id")
-
-
-@pytest.fixture
-def character_table(build_dynamo_table):
-    return build_dynamo_table("characters", "character_id")
-
-
-@pytest.fixture
-def service_environment(
-    test_stage,
-    test_account,
-    test_region,
-    test_service,
-    user_table,
-    participant_table,
-    character_table,
-):
-    return {
-        "STAGE": test_stage,
-        "AWS_ACCOUNT_ID": test_account,
-        "AWS_REGION": test_region,
-        "POWERTOOLS_SERVICE_NAME": test_service,
-        "POWERTOOLS_LOG_LEVEL": "DEBUG",
-        "USER_TABLE": user_table,
-        "PARTICIPANT_TABLE": participant_table,
-        "CHARACTER_TABLE": character_table,
-    }
+    return inner

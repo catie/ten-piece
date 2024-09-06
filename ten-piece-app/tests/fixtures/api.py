@@ -1,10 +1,10 @@
 import json
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict
 from unittest.mock import MagicMock
 import pytest
 
-from ten_piece.model.character import Character
-from ten_piece.model.user import User
+from ten_piece.data.model.character import Character
+from ten_piece.data.model.user import User
 
 
 @pytest.fixture

@@ -1,11 +1,11 @@
-import boto3
+import boto3  # type: ignore
 
-from boto3.dynamodb.table import TableResource
+from boto3.dynamodb.table import TableResource  # type: ignore
 from typing import Generic, Optional, Type, TypeVar
 from pydantic import BaseModel
 
-from ten_piece.environment import get_service_environment
-from ten_piece.model.record import DataRecord
+from ten_piece.core.environment import get_service_environment
+from ten_piece.data.model.record import DataRecord
 
 ModelObject = TypeVar("ModelObject", bound=DataRecord)
 
@@ -25,25 +25,21 @@ class DynamoDbClient(BaseModel, Generic[ModelObject]):
 
     def __init__(
         self,
-        table_name_var: str,
         model_type: Type[ModelObject],
     ):
         env = get_service_environment()
-        table_name = env.load_or_die(table_name_var)
+        table_name = env.load_or_die(f"{model_type.__name__.upper()}_TABLE")
         super().__init__(table_name=table_name, region=env.aws_region)
 
         self._model_type = model_type
         self._table = boto3.resource("dynamodb", self.region).Table(self.table_name)  # type: ignore
         self._primary_key = self.__primary_key__()
 
-    def update(self, record: ModelObject) -> None:
-        print(record.data_record)
-        self._table.put_item(Item=record.data_record)  # type: ignore
+    def put_item(self, item: ModelObject) -> None:
+        self._table.put_item(Item=item.data_record)  # type: ignore
 
-    def get(self, record_id: str) -> Optional[ModelObject]:
-        print({self._primary_key: record_id})
-        response = self._table.get_item(Key={self._primary_key: record_id})  # type: ignore
-        print(response)
+    def get_item(self, item_id: str) -> Optional[ModelObject]:
+        response = self._table.get_item(Key={self._primary_key: item_id})  # type: ignore
         result = response.get("Item", None)
         if result is None:
             return None

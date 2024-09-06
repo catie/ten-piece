@@ -1,0 +1,14 @@
+# Build Dependencies
+build
+wheel
+setuptools
+
+# Service Dependencies
+aws_lambda_powertools
+boto3
+pydantic
+
+# Test Dependencies
+coverage
+pytest
+moto

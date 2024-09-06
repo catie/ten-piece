@@ -1,42 +1,47 @@
 import pytest
 from unittest import mock
 
-from tests.fixtures.infra import (
+from tests.fixtures.infra import *
+from tests.fixtures.character import *
+from tests.fixtures.ranking import *
+from tests.fixtures.scope import *
+from tests.fixtures.user import *
+from tests.fixtures.tag import *
+
+pytest_plugins = [
+    "tests.fixtures.infra",
+    "tests.fixtures.character",
+    "tests.fixtures.ranking",
+    "tests.fixtures.scope",
+    "tests.fixtures.user",
+    "tests.fixtures.tag",
+]
+
+
+@pytest.fixture
+def service_environment(
     test_stage,
     test_account,
     test_region,
     test_service,
-    test_aws_environment,
-    build_dynamo_table,
     user_table,
-    participant_table,
     character_table,
-    service_environment,
-)
-from tests.fixtures.model import (
-    id_generator,
-    current_time,
-    previous_time,
-    build_user,
-    build_participant,
-    build_character,
-    user_catie,
-    user_erin,
-    participant_james,
-    participant_jackie,
-    character_roger,
-    character_yamato,
-)
-from tests.fixtures.api import (
-    request_context,
-    api_request,
-    update_user_request,
-    get_user_request,
-    update_participant_request,
-    get_participant_request,
-    update_character_request,
-    get_character_request,
-)
+    ranking_table,
+    scope_table,
+    tag_table,
+):
+    return {
+        "STAGE": test_stage,
+        "AWS_ACCOUNT_ID": test_account,
+        "AWS_REGION": test_region,
+        "POWERTOOLS_SERVICE_NAME": test_service,
+        "POWERTOOLS_LOG_LEVEL": "DEBUG",
+        "USER_TABLE": user_table,
+        "CHARACTER_TABLE": character_table,
+        "RANKING_TABLE": ranking_table,
+        "SCOPE_TABLE": scope_table,
+        "TAG_TABLE": tag_table,
+    }
 
 
 @pytest.fixture(autouse=True)
