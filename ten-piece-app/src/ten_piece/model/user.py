@@ -1,3 +1,4 @@
+from typing import Optional
 from ten_piece.model.person import Person
 
 class User(Person):

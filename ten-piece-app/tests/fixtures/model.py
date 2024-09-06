@@ -54,6 +54,7 @@ def build_participant(id_generator, current_time, previous_time):
             participant_id=id_generator(),
             display_name=display_name,
             gender=gender,
+            character_ranking=[],
             created_at=previous_time,
             updated_at=current_time,
         )
@@ -63,11 +64,11 @@ def build_participant(id_generator, current_time, previous_time):
 
 @pytest.fixture
 def build_character(id_generator, current_time, previous_time):
-    def inner(display_name: str, genders: List[Gender] = []):
+    def inner(display_name: str, gender: Gender = Gender.UNKNOWN):
         return Character(
             character_id=id_generator(),
             display_name=display_name,
-            genders=genders,
+            gender=gender,
             created_at=previous_time,
             updated_at=current_time,
         )
@@ -97,9 +98,9 @@ def participant_james(build_participant):
 
 @pytest.fixture
 def character_roger(build_character):
-    return build_character(display_name="Gol D. Roger", genders=[Gender.MALE])
+    return build_character(display_name="Gol D. Roger", gender=Gender.MALE)
 
 
 @pytest.fixture
 def character_yamato(build_character):
-    return build_character(display_name="Yamato", genders=[Gender.MALE, Gender.FEMALE])
+    return build_character(display_name="Yamato", gender=Gender.NONBINARY)

@@ -1,13 +1,10 @@
 from typing import List
 
-from ten_piece.model.gender import Gender
-from ten_piece.model.record import DataRecord
+from ten_piece.model.person import Person
 
-class Character(DataRecord):
+class Character(Person):
     character_id: str
-    display_name: str
     names: List[str] = []
-    genders: List[Gender] = []
 
     @property
     def id(self) -> str:
